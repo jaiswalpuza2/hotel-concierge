@@ -1,0 +1,37 @@
+# =============================================================================
+# Local rehearsal of the Railway deployment: runs the SAME production images
+# that get pushed to Railway, with production env values.
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d api frontend
+# =============================================================================
+services:
+  api:
+    image: hh-backend:prod
+    build:
+      context: .
+      dockerfile: Dockerfile.railway
+      target: production
+    # NOTE: seed_db.py TRUNCATEs and re-seeds — never put it in a start command.
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips '*'"
+    env_file: .env.prod
+    ports:
+      - "8100:8000"
+    volumes: []
+
+  frontend:
+    image: hh-frontend:prod
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8100
+        NEXT_PUBLIC_WS_URL: ws://localhost:8100
+    environment:
+      # Client URLs are already baked in at build time (args above); the
+      # variables here are kept for documentation and the server-side proxy.
+      NEXT_PUBLIC_API_URL: http://localhost:8100
+      NEXT_PUBLIC_WS_URL: ws://localhost:8100
+      API_INTERNAL_URL: http://api:8000
+    ports:
+      - "3100:3000"
+    volumes: []

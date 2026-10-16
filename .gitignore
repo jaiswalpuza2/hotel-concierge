@@ -1,0 +1,68 @@
+# =============================================================================
+# .gitignore — Autonomous Multi-Agent Local Business Concierge
+# =============================================================================
+
+# Secrets — NEVER commit these
+.env
+.env.local
+.env.*
+.env.prod.local
+frontend/.env
+*.pem
+*.key
+service-account.json
+*credentials*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.eggs/
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+
+# Alembic — keep versions/, ignore pyc inside
+alembic/versions/__pycache__/
+
+# Logs and temp files
+*.log
+tmp/
+logs/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+frontend/.next/
+frontend/node_modules/
+
+# Docker
+docker-compose.override.yml
+!.dockerignore
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Uploaded documents (store in object storage in production)
+uploads/
+
+# sentence-transformers model cache (large, download at runtime)
+backend/.cache/

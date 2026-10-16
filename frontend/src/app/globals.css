@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply bg-paper font-sans text-ink antialiased;
+}
+
+/* Visible keyboard focus everywhere (accessibility). */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-brand;
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  @apply rounded bg-stone-300;
+}
+
+/* ------------------------------------------------------------------ */
+/* Animation layer                                                     */
+/* ------------------------------------------------------------------ */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(26px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-26px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-16px) scale(1.04); }
+}
+@keyframes ping-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes eq-bar {
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+}
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.anim-fade-up { animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-fade-in { animation: fade-in 0.5s ease both; }
+.anim-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-slide-in-right { animation: slide-in-right 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-slide-in-left { animation: slide-in-left 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-slide-down { animation: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-shake { animation: shake 0.4s ease both; }
+.anim-float { animation: float-slow 7s ease-in-out infinite; }
+.anim-grow-x { animation: grow-x 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; transform-origin: left; }
+
+.ping-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: ping-ring 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Stagger helpers — apply alongside an .anim-* class. */
+.d1 { animation-delay: 60ms; }
+.d2 { animation-delay: 120ms; }
+.d3 { animation-delay: 180ms; }
+.d4 { animation-delay: 240ms; }
+.d5 { animation-delay: 300ms; }
+.d6 { animation-delay: 360ms; }
+
+/* Skeleton shimmer for loading placeholders. */
+.skeleton {
+  background: linear-gradient(90deg, #ece7df 25%, #f7f3ec 50%, #ece7df 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+/* Audio-player equaliser bars. */
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq-bar 0.7s ease-in-out infinite;
+}
+
+/* Streaming text caret. */
+.caret-blink {
+  animation: caret-blink 0.9s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

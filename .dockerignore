@@ -1,0 +1,19 @@
+# =============================================================================
+# .dockerignore — applies to builds with the REPO ROOT as context
+# (Dockerfile.railway, docker-compose.prod.yml). Keeps uploads small by
+# excluding local dependency folders and secrets.
+# =============================================================================
+**/node_modules
+**/.next
+**/.venv
+**/venv
+**/__pycache__
+**/.pytest_cache
+**/.mypy_cache
+**/*.egg-info
+**/*.log
+.git
+.env
+.env.*
+frontend/.env
+docs
